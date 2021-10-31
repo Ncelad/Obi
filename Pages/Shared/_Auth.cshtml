@@ -1,0 +1,43 @@
+﻿@{ViewData["Source"] = new Obi.Pages.IndexModel(Environment); }
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Obi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap" rel="stylesheet">
+</head>
+<body class="bg"  style="background-image: url( @((ViewData["Source"] as Obi.Pages.IndexModel).Configuration.GetSection("ConnectionStrings:Auth_BG").Value) );background-size: cover;background-repeat: no-repeat;">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark navbar-toggleable-sm bg-dark box-shadow">
+            <div class="container">
+                <a class="navbar-brand rubik-font" asp-area="" asp-page="/Index">
+                    <img src="@((ViewData["Source"] as Obi.Pages.IndexModel).Configuration.GetSection("ConnectionStrings:Logo").Value)" alt="" width="64" height="60" class="img-fluid d-inline-block align-text-top">
+                    <span class="h4">Obi</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="footer text-muted text-light navbar-dark bg-dark">
+        <div class="container">
+            &copy; 2021 - ObiMarket
+        </div>
+    </footer>
+    <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
